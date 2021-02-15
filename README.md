@@ -54,7 +54,7 @@ their processes and data onto the cloud.
    }**
    
 #### Log file Example : log_data/2018/11/2018-12-events.json
-![Example : log file : log_data/2018/11/2018-12-events.json](./images/log-data-2018-11-12-events.png)
+![](https://github.com/daranha1/DataEng-Data-Warehouse/blob/main/images/log-data-2018-11-12-events.png)
 
 ## Cloud Software:
 #### 1. S3 
@@ -112,7 +112,7 @@ speed up joins
 * Using a SORTKEY means rows are sorted before distribution to slices.  This will minimize <br/>
 the query time since each node has contiguous ranges of rows based on the sorting key.<br/>
 
-![Schema Design](./images/sparkify-schema-data-warehouse.PNG)
+![Schema Design](https://github.com/daranha1/DataEng-Data-Warehouse/blob/main/images/sparkify-schema-data-warehouse.PNG)
 
 ### Implementation
 #### A. Files (Script files, configuration file, Jupyter notebook file)
@@ -256,9 +256,9 @@ FROM time;<br/>
 | Free  | 82 |
 | Paid  | 22 |
 
-![Query Stats](./images/query-stats-users-level.PNG)<br/><br/>
+![Query Stats](https://github.com/daranha1/DataEng-Data-Warehouse/blob/main/images/query-stats-users-level.PNG)<br/><br/>
 
-![Query Details](./images/query-details-users-group-by-level.PNG)
+![Query Details](https://github.com/daranha1/DataEng-Data-Warehouse/blob/main/images/query-details-users-group-by-level.PNG)
 
 2. SELECT a.name AS artist_name, Count(*) AS No_of_plays 
 FROM songplays AS sp <br/>
