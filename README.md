@@ -53,9 +53,8 @@ their processes and data onto the cloud.
     "year": 0 <br/>
    }**
    
-   
 #### Log file Example : log_data/2018/11/2018-12-events.json
-![Example : log file : log_data/2018/11/2018-12-events.json](./Images/log-data-2018-11-12-events.png)
+![Example : log file : log_data/2018/11/2018-12-events.json](./images/log-data-2018-11-12-events.png)
 
 ## Cloud Software:
 #### 1. S3 
