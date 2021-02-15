@@ -113,7 +113,7 @@ speed up joins
 * Using a SORTKEY means rows are sorted before distribution to slices.  This will minimize <br/>
 the query time since each node has contiguous ranges of rows based on the sorting key.<br/>
 
-![](Images/Sparkify-Schema-data-warehouse.png)
+![](./Images/Sparkify-Schema-data-warehouse.png)
 
 ### Implementation
 #### A. Files (Script files, configuration file, Jupyter notebook file)
