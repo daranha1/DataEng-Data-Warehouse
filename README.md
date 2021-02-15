@@ -55,7 +55,7 @@ their processes and data onto the cloud.
    
    
 #### Log file Example : log_data/2018/11/2018-12-events.json
-![Example : log file : log_data/2018/11/2018-12-events.json](Images/log-data-2018-11-12-events.png)
+![Example : log file : log_data/2018/11/2018-12-events.json](./Images/log-data-2018-11-12-events.png)
 
 ## Cloud Software:
 #### 1. S3 
@@ -111,9 +111,9 @@ Redshift lets you easily save the results of your queries back to your S3 data l
 speed up joins
 * Distibuting a dimension table with distyle ALL eliminates shuffling
 * Using a SORTKEY means rows are sorted before distribution to slices.  This will minimize <br/>
-the query time since each node has contiguous ranges of rows based on the sorting key.
+the query time since each node has contiguous ranges of rows based on the sorting key.<br/>
 
-![Schema Diagram](Images/Sparkify-Schema-data-warehouse.png)
+![](Images/Sparkify-Schema-data-warehouse.png)
 
 ### Implementation
 #### A. Files (Script files, configuration file, Jupyter notebook file)
@@ -142,9 +142,7 @@ the query time since each node has contiguous ranges of rows based on the sortin
 |    |                                           | Output was removed from this file for security | 
 |    |                                           | reasons |
 | 6  | **Redshift_Cluster_Setup_With_Output.html | The executed notebook file.  |
-|    |                                           | Account related data has been replaced with 12 X's|                                                                                                                    
-
-#### B. Configuration and Redshift Cluster Setup
+|    |                                           | Account related data has been replaced with 12 X's|                                                                                                      #### B. Configuration and Redshift Cluster Setup
 #### B.1. Configuration (dwh.cfg)
          
 | Section | Parameter | Value |
@@ -219,7 +217,7 @@ the query time since each node has contiguous ranges of rows based on the sortin
    import psycopg2 - a python library - to connect to the database<br/>
    import copy and insert table queries from sql_queries.py<br/>
    
- **Note : ** create_tables.py and etl.py are executed in the Jupyter notebook
+ **Note** : create_tables.py and etl.py are executed in the Jupyter notebook
 
 ## E. Running Queries in Redshift Query Editor
 ##### E.1 Checking Row Counts of Tables in Redshift
@@ -259,9 +257,9 @@ FROM time;<br/>
 | Free  | 82 |
 | Paid  | 22 |
 
-![Query Stats](Images/Query-stats-users-level.png)
+![Query Stats](./Images/Query-stats-users-level.png)<br/><br/>
 
-![Query Details](Images/Query-details-users-group-by-level.png)
+![Query Details](./Images/Query-details-users-group-by-level.png)
 
 2. SELECT a.name AS artist_name, Count(*) AS No_of_plays 
 FROM songplays AS sp <br/>
@@ -304,7 +302,7 @@ LIMIT 8;<br/>
 ### References
 1. https://popsql.com/learn-sql/redshift/how-to-use-distkey-sortkey-and-define-column-compression-encoding-in-redshift<br/>
 How to Use DISTKEY, SORTKEY and Define Column Compression Encoding in Redshift<br/>
-2. https://aws.amazon.com/blogs/big-data/amazon-redshift-engineerings-advanced-table-design-playbook-distribution-styles-and-distribution-keys/
+2. https://aws.amazon.com/blogs/big-data/amazon-redshift-engineerings-advanced-table-design-playbook-distribution-styles-and-distribution-keys/<br/>
 AWS Big Data Blog<br/>
 Amazon Redshift Engineering's Advanced Table Design Playbook:<br/>
 Distribution Styles and Distribution Keys
