@@ -113,7 +113,7 @@ speed up joins
 * Using a SORTKEY means rows are sorted before distribution to slices.  This will minimize <br/>
 the query time since each node has contiguous ranges of rows based on the sorting key.<br/>
 
-![](./Images/Sparkify-Schema-data-warehouse.png)
+![Schema Design](./images/sparkify-schema-data-warehouse.png)
 
 ### Implementation
 #### A. Files (Script files, configuration file, Jupyter notebook file)
@@ -257,9 +257,9 @@ FROM time;<br/>
 | Free  | 82 |
 | Paid  | 22 |
 
-![Query Stats](./Images/Query-stats-users-level.png)<br/><br/>
+![Query Stats](./images/query-stats-users-level.png)<br/><br/>
 
-![Query Details](./Images/Query-details-users-group-by-level.png)
+![Query Details](./images/query-details-users-group-by-level.png)
 
 2. SELECT a.name AS artist_name, Count(*) AS No_of_plays 
 FROM songplays AS sp <br/>
