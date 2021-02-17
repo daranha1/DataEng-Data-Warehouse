@@ -18,9 +18,10 @@ def create_tables(cur, conn):
     This creates the staging and fact and dimensional tables
     """
     for currQuery in create_table_queries:
+        print (f'Created : {currQuery}')
         cur.execute(currQuery)
         conn.commit()
-        print (f'Created : {currQuery}')
+        
 
 def main():
     """
