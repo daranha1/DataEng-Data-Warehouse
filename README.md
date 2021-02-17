@@ -97,20 +97,22 @@ Redshift lets you easily save the results of your queries back to your S3 data l
 
  ## Schema for Song Play Analysis
  
-| No | Table Name | Table Type | Column              | diststyle |
-|----|------------|------------|---------------------|-----------|
-| 1  | songplays  | Fact       | songplay_id SORTKEY |           |
-|    |            |            | artist_id  DISTKEY  |           |
-| 2  | artists    | Dimension  | artist_id SORTKEY   | ALL       |
-| 3  | songs      | Dimension  | song_id SORTKEY     |           |
-| 4  | users      | Dimension  | user_id SORTKEY     | ALL       |
-|    |            |            |                     |           |
-| 5  | time       | Dimension  | start_time SORTKEY  |           |
-* Small tables (e.g. lookup tables like artists and users can be replicated on all slices to <br/>
+| No | Table Name | Table Type | Column               | diststyle |
+|----|------------|------------|----------------------|-----------|
+| 1  | songplays  | Fact       | songplay_id SORTKEY  |           |
+|    |            |            | artist_id  DISTKEY   |           |
+| 2  | artists    | Dimension  | artist_id DISTKEYKEY |           |
+| 3  | songs      | Dimension  | song_id SORTKEY      | All       |
+| 4  | users      | Dimension  | user_id SORTKEY      | ALL       |
+|    |            |            |                      |           |
+| 5  | time       | Dimension  | start_time SORTKEY   |           |
+* Small tables (e.g. lookup tables like songs and users can be replicated on all slices to <br/>
 speed up joins
 * Distibuting a dimension table with distyle ALL eliminates shuffling
+* artist_id is used as a distkey because it is a larger dimension table that is joined with the<br/> fact table songplays
 * Using a SORTKEY means rows are sorted before distribution to slices.  This will minimize <br/>
 the query time since each node has contiguous ranges of rows based on the sorting key.<br/>
+* The above sortkeys in each of the above tables are the fields which are used when JOINS are<br/> performed with the fact table 
 
 ![Schema Design](https://github.com/daranha1/DataEng-Data-Warehouse/blob/main/images/sparkify-schema-data-warehouse.PNG)
 
@@ -230,7 +232,7 @@ the query time since each node has contiguous ranges of rows based on the sortin
 
 3. SELECT COUNT(*) AS songplays_row_count<br/>
    FROM songplays;<br/>
-**songplays_row_count: 9957**<br/>
+**songplays_row_count: 319**<br/>
 
 4. SELECT COUNT(*) AS users_row_count<br/>
 FROM users;<br/>
@@ -246,7 +248,7 @@ FROM artists;<br/>
 
 7. select count(*) AS time_row_count<br/>
 FROM time;<br/>
-**time_row_count : 6813**<br/>
+**time_row_count : 319**<br/>
 
 ##### E.2 Analytic Queries
 1. SELECT level, count(level) from users group by level;
@@ -268,16 +270,17 @@ GROUP BY artist_name <br/>
 ORDER BY No_of_Plays DESC<br/>
 LIMIT 8;<br/>
 
-| Artist_Name | No_of_plays |
-|------------------|--------|
-| Muse             |   245  |
-| Radiohead	       |   240  |
-| Coldplay	       |   232  |
-| Kings Of Leon	   |   220  |
-| Alliance Ethnik  |   150  |
-| Foo Fighters	   |   126  |
-| The Black Keys   |   108  |
-| The Beastie Boys |   105  |
+| Artist_Name                   | No_of_plays |
+|-------------------------------|-------------|
+| Dwight Yoakam                     |  37  |
+| Kid Cudi / Kanye West / Common	|  10  |
+| Kid Cudi	                        |  10  |
+| Ron Carter	                    |   9  |   
+| Lonnie Gordon	                    |   9  |
+| B.o.B	                            |   8  |
+| Usher	                            |   6  |
+| Muse	                            |   6  |
+
 
 3. SELECT so.title AS song_title, Count(*) AS No_of_Plays <br/>
 FROM songplays AS sp <br/>
@@ -288,15 +291,16 @@ ORDER BY No_of_Plays DESC <br/>
 LIMIT 8;<br/>
 
 | song_title | no_of_plays |
-|------------------------------------------------|-----|
-| Speed Of Sound (Live)	                         | 58  |
-| A Rush Of Blood To The Head (Live In Sydney)	 | 58  |
-| Don't Panic	                                 | 58  |
-| One I Love	                                 | 58  |
-| Ragoo	                                         | 55  |
-| Day Old Blues	                                 | 55  |
-| Genius	                                     | 55  |
-| Wicker Chair	                                 | 55  |
+|------------------------------------------------------|-----|
+| You're The One						         	   |  37 |
+| I CAN'T GET STARTED					               |   9 |
+| Catch You Baby (Steve Pitron & Max Sanna Radio Edit) |   9 |
+| Nothin' On You [feat. Bruno Mars] (Album Version)	   |   8 |
+| Hey Daddy (Daddy's Home)					           |   6 |          
+| Make Her Say							               |   5 |
+| Up Up & Away							               |   5 |
+| Unwell (Album Version)						       |   4 |
+
 
 ### References
 1. https://popsql.com/learn-sql/redshift/how-to-use-distkey-sortkey-and-define-column-compression-encoding-in-redshift<br/>
